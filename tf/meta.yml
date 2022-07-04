@@ -1,0 +1,8 @@
+#cloud-config
+users:
+  - name: panda
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8B+vQk2F8WXStNK0hwmbv1JhQ0IViPl4o1uI0JpWe+raplUaEjT+5pAzpWGd2kwMSrcc2de2jPRca7v/xstK0xOch21omkRY5EpxJ4iwjDax9OMxm52srjhssjwqwI+w8CsKP96J6KQWq7FumqJBOzzDhEvCXooQ6zL4XAGzDL0aZHy0+j2LhwIK18wDesD6XJKmacgUuTlyYI3TNdCF4wYHlObO83jg7IOH/0IIsBwzzcqbkXKkl7Ek4USrp9IFOISajZ//oeUoDSBMlNs7Sx3Jkdkcl8wwuHEo1OtU4hjh0wbdKltAsFKqn42ZCEaL9PeWTN8A3gT3IO6eqrBu3 vagrant@vagrant

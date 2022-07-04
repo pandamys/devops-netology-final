@@ -1,0 +1,8 @@
+worker_processes: auto
+worker_connections: 2048
+client_max_body_size: 512M
+virtual_domain: pandamys.ru
+gitlab_domain: gitlab.pandamys.ru
+grafana_domain: grafana.pandamys.ru
+prometheus_domain: prometheus.pandamys.ru
+alertmanager_domain: alertmanager.pandamys.ru

@@ -1,0 +1,4 @@
+---
+    webservers:
+      hosts:
+        ansible_connection: ssh
