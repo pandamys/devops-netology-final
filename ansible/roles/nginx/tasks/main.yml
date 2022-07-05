@@ -1,6 +1,5 @@
 ---
     - name: update apt packages
-      become: true
       apt:
         update_cache: yes
       when:
@@ -66,7 +65,7 @@
         executable: /bin/bash
 
     - name: "Begin Let's Encrypt challenges"
-      letsencrypt:
+      acme_certificate:
         acme_directory: "{{ acme_directory }}"
         acme_version: "{{ acme_version }}"
         account_key_src: "{{ letsencrypt_account_key }}"
@@ -99,7 +98,7 @@
       - "www.{{ domain_name }}"
 
     - name: "Complete Let's Encrypt challenges"
-      letsencrypt:
+      acme_certificate:
         acme_directory: "{{ acme_directory }}"
         acme_version: "{{ acme_version }}"
         account_key_src: "{{ letsencrypt_account_key }}"
