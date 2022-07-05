@@ -62,30 +62,30 @@
 
     - name: "Generate Let's Encrypt CSR"
       shell: "openssl req -new -sha256 -key /etc/letsencrypt/keys/{{ domain_name }}.key -subj \"/CN={{ domain_name }}\" -reqexts SAN -config <(cat /etc/ssl/openssl.cnf <(printf \"\n[SAN]\nsubjectAltName=DNS:{{ domain_name }},DNS:www.{{ domain_name }},DNS:www.{{ domain_name }},DNS:{{ prometheus_domain }},DNS:{{ grafana_domain }},DNS:{{ alertmanager_domain }},DNS:{{ gitlab_domain }}\")) | sudo tee /etc/letsencrypt/csrs/{{ domain_name }}.csr"
-      args:
-      executable: /bin/bash
+        args:
+        executable: /bin/bash
 
     - name: "Begin Let's Encrypt challenges"
       letsencrypt:
-      acme_directory: "{{ acme_directory }}"
-      acme_version: "{{ acme_version }}"
-      account_key_src: "{{ letsencrypt_account_key }}"
-      account_email: "{{ acme_email }}"
-      terms_agreed: 1
-      challenge: "{{ acme_challenge_type }}"
-      csr: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
-      dest: "{{ letsencrypt_certs_dir }}/{{ domain_name }}.crt"
-      fullchain_dest: "{{ letsencrypt_certs_dir }}/fullchain_{{ domain_name }}.crt"
-      remaining_days: 91
-      register: acme_challenge_your_domain
+        acme_directory: "{{ acme_directory }}"
+        acme_version: "{{ acme_version }}"
+        account_key_src: "{{ letsencrypt_account_key }}"
+        account_email: "{{ acme_email }}"
+        terms_agreed: 1
+        challenge: "{{ acme_challenge_type }}"
+        csr: "{{ letsencrypt_csrs_dir }}/{{ domain_name }}.csr"
+        dest: "{{ letsencrypt_certs_dir }}/{{ domain_name }}.crt"
+        fullchain_dest: "{{ letsencrypt_certs_dir }}/fullchain_{{ domain_name }}.crt"
+        remaining_days: 91
+        register: acme_challenge_your_domain
 
     - name: "Create .well-known/acme-challenge directory"
       file:
-      path: /var/www/html/.well-known/acme-challenge
-      state: directory
-      owner: root
-      group: root
-      mode: u=rwx,g=rx,o=rx
+        path: /var/www/html/.well-known/acme-challenge
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
 
     - name: "Implement http-01 challenge files"
       copy:
