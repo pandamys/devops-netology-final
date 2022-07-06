@@ -50,7 +50,7 @@
           MYSQL_RANDOM_ROOT_PASSWORD: "true"
         networks:
           - name: "{{ docker_network_name }}"
-            ipv4_address: "{{ 'docker_address_' ~ inventory_hostname }}"
+            ipv4_address: "{{ hostvars[inventory_hostname]['docker_address_' ~ item] }}"
         command: ndbd
 
     - name: install cluster container
