@@ -31,7 +31,7 @@
         networks:
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ mysql_address_managment }}
-        command: ndb_mgmd
+        command: "ndb_mgmd"
       when: ansible_hostname == "mysql-db01"
 
     - name: install docker container mysql
@@ -51,7 +51,7 @@
         networks:
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ docker_address }}"
-        command: ndbd
+        command: "ndbd"
 
     - name: install cluster container
       docker_container:
@@ -64,5 +64,5 @@
         networks:
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ mysql_address_server_node }}"
-        command: mysqld
+        command: "mysqld"
       when: ansible_hostname == "mysql-db01"
