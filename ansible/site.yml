@@ -1,9 +1,9 @@
 ---
-    - name: Install nginx
-      hosts: webservers
-      become: yes
-      roles:
-        - nginx
+    #- name: Install nginx
+    #  hosts: webservers
+    #  become: yes
+    #  roles:
+    #    - nginx
 
     - name: Install mysql
       hosts: databases
