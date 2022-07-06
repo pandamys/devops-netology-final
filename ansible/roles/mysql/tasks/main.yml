@@ -23,7 +23,7 @@
     - name: install cluster container
       docker_container:
         name: management1
-        image: "mysql/mysql-cluster"
+        image: mysql/mysql-cluster
         state: started
         detach: yes
         ports:
@@ -37,7 +37,7 @@
     - name: install docker container mysql
       docker_container:
         name: mysql
-        image: "mysql/mysql-cluster"
+        image: mysql/mysql-cluster
         state: started
         auto_remove: true
         detach: yes
@@ -56,7 +56,7 @@
     - name: install cluster container
       docker_container:
         name: mysql1
-        image: "mysql/mysql-cluster"
+        image: mysql/mysql-cluster
         state: started
         detach: yes
         ports:
