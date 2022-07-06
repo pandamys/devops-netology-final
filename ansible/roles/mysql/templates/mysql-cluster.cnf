@@ -11,7 +11,7 @@ datadir=/var/lib/mysql
 
 [ndbd]
 NodeId=2
-hostname={{ node1_address }}
+hostname={{ docker_address_mysql-db01 }}
 datadir=/var/lib/mysql
 
 [ndbd]
