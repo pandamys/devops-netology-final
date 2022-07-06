@@ -1,5 +1,5 @@
 ---
-    - include_vars: "vars/{{ inventory_hostname }}.yml"
+    #- include_vars: "vars/{{ inventory_hostname }}.yml"
     - name: update apt packages
       apt:
         update_cache: yes
