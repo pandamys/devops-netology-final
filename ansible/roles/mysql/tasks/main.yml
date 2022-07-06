@@ -1,5 +1,4 @@
 ---
-    #- include_vars: "vars/{{ inventory_hostname }}.yml"
     - name: update apt packages
       apt:
         update_cache: yes
@@ -43,7 +42,7 @@
         auto_remove: true
         detach: yes
         ports:
-          - "3306:3306"
+          - "3301:3306"
         env:
           MYSQL_USER: "{{ db_user }}"
           MYSQL_PASSWORD: "{{ db_pass }}"
