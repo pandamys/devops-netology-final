@@ -65,4 +65,4 @@
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ mysql_address_server_node }}"
         command: mysqld
-      when: ansible_hostname == "mysql-db01"
+      when: ansible_hostname == mysql-db01
