@@ -21,7 +21,7 @@
         name: mysql
         image: "mysql:latest"
         state: started
-        auto_remove: true
+        #auto_remove: true
         detach: yes
         ports:
           - "3306:3306"
