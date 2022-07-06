@@ -21,4 +21,4 @@ datadir=/var/lib/mysql
 
 [mysqld]
 NodeId=4
-hostname={{ managment_address }}
+hostname={{ mysql_address_server_node }}
