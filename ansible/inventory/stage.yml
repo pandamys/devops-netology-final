@@ -3,3 +3,8 @@
       hosts:
         nginx:
           ansible_host: 51.250.81.248
+
+    databases:
+      hosts:
+        mysql:
+          ansible_host: 51.250.81.248
