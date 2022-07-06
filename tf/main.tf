@@ -16,7 +16,7 @@ resource "yandex_vpc_subnet" "subnet-1" {
 }
 
 resource "yandex_compute_instance" "nginx" {
-  name = "pandamys.ru"
+  name = "pandamys-ru"
 
   resources {
     cores  = 2
@@ -40,7 +40,7 @@ resource "yandex_compute_instance" "nginx" {
 }
 
 resource "yandex_compute_instance" "db01" {
-  name = "db01.pandamys.ru"
+  name = "db01-pandamys-ru"
 
   resources {
     cores  = 4
@@ -64,7 +64,7 @@ resource "yandex_compute_instance" "db01" {
 }
 
 resource "yandex_compute_instance" "db02" {
-  name = "db02.pandamys.ru"
+  name = "db02-pandamys-ru"
 
   resources {
     cores  = 4
@@ -88,7 +88,7 @@ resource "yandex_compute_instance" "db02" {
 }
 
 resource "yandex_compute_instance" "app" {
-  name = "app.pandamys.ru"
+  name = "app-pandamys-ru"
 
   resources {
     cores  = 4
