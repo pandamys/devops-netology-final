@@ -17,7 +17,7 @@
     - name: create docker network
       docker_network:
         name: "{{ docker_network_name }}"
-        ipam_options:
+        ipam_config:
           subnet: '192.168.0.0/16'
 
     - name: install cluster container
