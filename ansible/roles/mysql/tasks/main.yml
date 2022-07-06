@@ -41,8 +41,7 @@
         state: started
         auto_remove: true
         detach: yes
-        ports:
-          - "3306:3306"
+        ports: "3306:3306"
         env:
           MYSQL_USER: "{{ db_user }}"
           MYSQL_PASSWORD: "{{ db_pass }}"
