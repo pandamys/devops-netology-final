@@ -1,4 +1,11 @@
 db_name: wordpress
 db_user: wordpress
 db_pass: wordpress
-db_root: pressword
+
+managment_address: 192.168.10.14
+node1_address: 192.168.10.14
+node2_address: 192.168.10.10
+
+docker_network_name: cluster_mysql
+mysql_address_managment: 192.168.0.2
+mysql_address_server_node: 192.168.0.10
