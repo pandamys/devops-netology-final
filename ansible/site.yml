@@ -4,3 +4,8 @@
       become: yes
       roles:
         - nginx
+
+    - name: Install mysql
+      hosts: databases
+      roles:
+        - mysql

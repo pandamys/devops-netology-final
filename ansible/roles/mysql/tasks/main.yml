@@ -1,0 +1,27 @@
+---
+    - name: update apt packages
+      apt:
+        update_cache: yes
+      when:
+        ansible_os_family == "Debian"
+
+    - name: install docker
+      become: yes
+      apt:
+        name=docker
+        state=latest
+      when:
+        ansible_os_family == "Debian"
+
+    - name: install docker container mysql
+      docker_container:
+        name: mysql
+        image: "mysql:latest"
+        state: started
+        auto_remove: true
+        ports:
+          - "3306:3306"
+        env:
+          - MYSQL_USER: "{{ db_user }}"
+          - MYSQL_PASSWORD: "{{ db_pass }}"
+          - MYSQL_DATABASE: "{{ db_name }}"
