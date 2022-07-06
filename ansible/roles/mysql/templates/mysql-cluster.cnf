@@ -1,0 +1,24 @@
+[ndbd default]
+NoOfReplicas=2
+DataMemory=80M
+IndexMemory=18M
+
+
+[ndb_mgmd]
+NodeId=1
+hostname={{ managment_address }}
+datadir=/var/lib/mysql
+
+[ndbd]
+NodeId=2
+hostname={{ node1_address }}
+datadir=/var/lib/mysql
+
+[ndbd]
+NodeId=3
+hostname={{ node2_address }}
+datadir=/var/lib/mysql
+
+[mysqld]
+NodeId=4
+hostname={{ managment_address }}

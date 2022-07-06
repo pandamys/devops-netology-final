@@ -2,6 +2,8 @@ db_name: wordpress
 db_user: wordpress
 db_pass: wordpress
 
+mysql_config: /etc/config_mysql
+
 managment_address: 192.168.10.14
 node1_address: 192.168.10.14
 node2_address: 192.168.10.10

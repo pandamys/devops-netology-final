@@ -14,6 +14,24 @@
       pip:
         name: docker
 
+    - name: "Create dir for config"
+      file:
+        path: "{{ mysql_config }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+
+    - name: "Copy config my.cnf"
+      template:
+        src=templates/my.cnf
+        dest="{{ mysql_config }}"
+
+    - name: "Copy config mysql-cluster.cnf"
+      template:
+        src=templates/mysql-cluster.cnf
+        dest="{{ mysql_config }}"
+
     - name: create docker network
       docker_network:
         name: "{{ docker_network_name }}"
@@ -34,6 +52,9 @@
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ mysql_address_managment }}"
         command: ndb_mgmd
+        volumes:
+          - /etc/config_mysql/my.cnf:/etc/my.cnf
+          - /etc/config_mysql/my.cnf:/etc/mysql-cluster.cnf
       when: inventory_hostname == "mysql-db01"
 
     - name: install docker container mysql
@@ -53,6 +74,9 @@
         networks:
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ lookup('vars', 'docker_address_' ~ inventory_hostname) }}"
+        volumes:
+          - /etc/config_mysql/my.cnf:/etc/my.cnf
+          - /etc/config_mysql/my.cnf:/etc/mysql-cluster.cnf
         command: ndbd
 
     - name: install container server node
@@ -66,5 +90,8 @@
         networks:
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ mysql_address_server_node }}"
+        volumes:
+          - /etc/config_mysql/my.cnf:/etc/my.cnf
+          - /etc/config_mysql/my.cnf:/etc/mysql-cluster.cnf
         command: mysqld
       when: inventory_hostname == "mysql-db01"
