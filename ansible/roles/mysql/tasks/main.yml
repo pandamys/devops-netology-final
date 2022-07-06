@@ -2,15 +2,13 @@
     - name: update apt packages
       apt:
         update_cache: yes
-      when:
-        ansible_os_family == "Debian"
+      when: ansible_os_family == "Debian"
 
     - name: install pip3
       apt:
         name=python3-pip
         state=latest
-      when:
-        ansible_os_family == "Debian"
+      when: ansible_os_family == "Debian"
 
     - name: install docker
       pip:
@@ -34,8 +32,7 @@
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ mysql_address_managment }}
         command: ndb_mgmd
-      when:
-        ansible_hostname == "mysql-db01"
+      when: ansible_hostname == "mysql-db01"
 
     - name: install docker container mysql
       docker_container:
@@ -68,5 +65,4 @@
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ mysql_address_server_node }}"
         command: mysqld
-      when:
-        ansible_hostname == "mysql-db01"
+      when: ansible_hostname == "mysql-db01"
