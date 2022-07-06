@@ -8,6 +8,7 @@ managment_address: 192.168.10.14
 node1_address: 192.168.10.14
 node2_address: 192.168.10.10
 
+docker_address_mysql: 192.168.0.3
 docker_address_mysql-db01: 192.168.0.3
 docker_address_mysql-db02: 192.168.0.4
 docker_network_name: cluster_mysql
