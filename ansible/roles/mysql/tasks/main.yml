@@ -51,10 +51,10 @@
         networks:
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ mysql_address_managment }}"
-        command: ndb_mgmd
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
+        command: ndb_mgmd
       when: inventory_hostname == "mysql-db01"
 
     - name: install docker container mysql
