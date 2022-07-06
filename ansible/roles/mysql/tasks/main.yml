@@ -32,7 +32,7 @@
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ mysql_address_managment }}"
         command: ndb_mgmd
-      when: ansible_hostname == mysql-db01
+      when: inventory_hostname == "mysql-db01"
 
     - name: install docker container mysql
       docker_container:
@@ -65,4 +65,4 @@
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ mysql_address_server_node }}"
         command: mysqld
-      when: ansible_hostname == mysql-db01
+      when: inventory_hostname == "mysql-db01"
