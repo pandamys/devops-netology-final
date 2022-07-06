@@ -31,13 +31,13 @@
         networks:
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ mysql_address_managment }}
-        command: "ndb_mgmd"
-      when: ansible_hostname == "mysql-db01"
+        command: ndb_mgmd
+      when: ansible_hostname == mysql-db01
 
     - name: install docker container mysql
       docker_container:
         name: mysql
-        image: "mysql:latest"
+        image: "mysql/mysql-cluster"
         state: started
         auto_remove: true
         detach: yes
@@ -51,7 +51,7 @@
         networks:
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ docker_address }}"
-        command: "ndbd"
+        command: ndbd
 
     - name: install cluster container
       docker_container:
@@ -64,5 +64,5 @@
         networks:
           name: "{{ docker_network_name }}"
           ipv4_address: "{{ mysql_address_server_node }}"
-        command: "mysqld"
-      when: ansible_hostname == "mysql-db01"
+        command: mysqld
+      when: ansible_hostname == mysql-db01
