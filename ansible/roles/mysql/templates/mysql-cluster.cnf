@@ -6,12 +6,12 @@ IndexMemory=18M
 
 [ndb_mgmd]
 NodeId=1
-hostname={{ managment_address }}
+hostname={{ mysql_address_management }}
 datadir=/var/lib/mysql
 
 [ndbd]
 NodeId=2
-hostname={{ docker_address_mysql }}
+hostname={{ node1_address }}
 datadir=/var/lib/mysql
 
 [ndbd]

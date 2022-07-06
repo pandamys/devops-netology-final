@@ -4,7 +4,7 @@ db_pass: wordpress
 
 mysql_config: /etc/config_mysql
 
-managment_address: 192.168.10.14
+management_address: 192.168.10.14
 node1_address: 192.168.10.14
 node2_address: 192.168.10.10
 
@@ -12,5 +12,5 @@ docker_address_mysql: 192.168.0.3
 docker_address_mysql-db01: 192.168.0.3
 docker_address_mysql-db02: 192.168.0.4
 docker_network_name: cluster_mysql
-mysql_address_managment: 192.168.0.2
+mysql_address_management: 192.168.0.2
 mysql_address_server_node: 192.168.0.10

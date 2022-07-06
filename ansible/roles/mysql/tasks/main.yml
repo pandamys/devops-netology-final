@@ -50,7 +50,7 @@
           - "3306:3306"
         networks:
           - name: "{{ docker_network_name }}"
-            ipv4_address: "{{ mysql_address_managment }}"
+            ipv4_address: "{{ mysql_address_management }}"
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
