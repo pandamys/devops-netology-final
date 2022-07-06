@@ -16,7 +16,7 @@ resource "yandex_vpc_subnet" "subnet-1" {
 }
 
 resource "yandex_compute_instance" "nginx" {
-  name = "nginx"
+  name = "pandamys.ru"
 
   resources {
     cores  = 2
@@ -32,6 +32,78 @@ resource "yandex_compute_instance" "nginx" {
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-1.id
     nat       = true
+  }
+
+  metadata = {
+    user-data = file("./meta.yml")
+  }
+}
+
+resource "yandex_compute_instance" "db01" {
+  name = "db01.pandamys.ru"
+
+  resources {
+    cores  = 4
+    memory = 4
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8hguc7o9hhr5bcvhql"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = false
+  }
+
+  metadata = {
+    user-data = file("./meta.yml")
+  }
+}
+
+resource "yandex_compute_instance" "db02" {
+  name = "db02.pandamys.ru"
+
+  resources {
+    cores  = 4
+    memory = 4
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8hguc7o9hhr5bcvhql"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = false
+  }
+
+  metadata = {
+    user-data = file("./meta.yml")
+  }
+}
+
+resource "yandex_compute_instance" "app" {
+  name = "app.pandamys.ru"
+
+  resources {
+    cores  = 4
+    memory = 4
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8hguc7o9hhr5bcvhql"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = false
   }
 
   metadata = {
