@@ -47,7 +47,7 @@
           MYSQL_USER: "{{ db_user }}"
           MYSQL_PASSWORD: "{{ db_pass }}"
           MYSQL_DATABASE: "{{ db_name }}"
-          MYSQL_RANDOM_ROOT_PASSWORD: true
+          MYSQL_RANDOM_ROOT_PASSWORD: "true"
         networks:
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ 'docker_address_' + ansible_hostname }}"
