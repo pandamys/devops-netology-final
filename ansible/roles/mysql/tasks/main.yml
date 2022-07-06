@@ -1,18 +1,24 @@
 ---
     - name: update apt packages
-      become: yes
       apt:
         update_cache: yes
       when:
         ansible_os_family == "Debian"
 
     - name: install docker
-      become: yes
       apt:
         name=docker
         state=latest
       when:
         ansible_os_family == "Debian"
+
+    - name: install pip3
+      apt:
+        name=docker
+        state=latest
+      when:
+        ansible_os_family == "Debian"
+
 
     - name: install docker container mysql
       docker_container:
