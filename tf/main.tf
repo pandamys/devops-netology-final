@@ -55,6 +55,7 @@ resource "yandex_compute_instance" "db01" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = true
   }
 
   metadata = {
@@ -78,6 +79,7 @@ resource "yandex_compute_instance" "db02" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = true
   }
 
   metadata = {
@@ -101,6 +103,7 @@ resource "yandex_compute_instance" "app" {
 
   network_interface {
     subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = true
   }
 
   metadata = {
