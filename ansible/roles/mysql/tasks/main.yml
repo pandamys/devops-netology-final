@@ -17,9 +17,9 @@
     - name: create docker network
       docker_network:
         name: "{{ docker_network_name }}"
+        driver: "overlay"
         ipam_config:
           - subnet: '192.168.0.0/16'
-            driver: "overlay"
 
     - name: install cluster container
       docker_container:
