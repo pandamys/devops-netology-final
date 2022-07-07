@@ -46,7 +46,7 @@
         image: mysql/mysql-cluster
         state: started
         detach: yes
-        ports:
+        published_ports:
           - "3306:3306"
           - "1186:1186"
         networks:
@@ -65,7 +65,7 @@
         state: started
         auto_remove: true
         detach: yes
-        ports:
+        published_ports:
           - "3301:3306"
         env:
           MYSQL_USER: "{{ db_user }}"
@@ -86,7 +86,7 @@
         image: mysql/mysql-cluster
         state: started
         detach: yes
-        ports:
+        published_ports:
           - "3302:3306"
         networks:
           - name: "{{ docker_network_name }}"
