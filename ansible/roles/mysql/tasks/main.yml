@@ -83,7 +83,13 @@
 
     - name: "Install server mysql"
       apt:
-        deb: "{{ mysql_unarchive }}/mysql-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
+        deb: {{ mysql_unarchive }}/{{ item }}
+      with_items:
+        - "mysql-common_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
+        - "mysql-cluster-community-client_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
+        - "mysql-client_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
+        - "mysql-cluster-community-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
+        - "mysql-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
 
     - name: "Copy config mysql-cluster.cnf"
       template:
