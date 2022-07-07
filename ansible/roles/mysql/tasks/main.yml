@@ -90,6 +90,7 @@
         - "mysql-cluster-community-client-core_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
         - "mysql-cluster-community-client_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
         - "mysql-client_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
+        - "mysql-cluster-community-server-core_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
         - "mysql-cluster-community-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
         - "mysql-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
 
