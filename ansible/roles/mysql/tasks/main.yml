@@ -83,7 +83,7 @@
 
     - name: "Install server mysql"
       apt:
-        deb: "{{ mysql_unarchive / item }}"
+        deb: "{{ mysql_unarchive }}"/"{{ item }}"
       with_items:
         - "mysql-common_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
         - "mysql-cluster-community-client_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
