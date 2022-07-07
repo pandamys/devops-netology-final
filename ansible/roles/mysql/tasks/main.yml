@@ -80,6 +80,7 @@
         src: "/tmp/mysql-cluster-{{ mysql_version }}-linux-x86_64.tar"
         dest: "{{ mysql_unarchive }}"
         extra_opts: [ --strip-components=1 ]
+        creates: "{{ mysql_unarchive }}/mysql-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
 
     - name: "Install server mysql"
       apt:
