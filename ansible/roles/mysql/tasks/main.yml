@@ -48,6 +48,7 @@
         detach: yes
         ports:
           - "3306:3306"
+          - "1186:1186"
         networks:
           - name: "{{ docker_network_name }}"
             ipv4_address: "{{ mysql_address_management }}"
