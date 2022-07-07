@@ -4,6 +4,7 @@ db_pass: wordpress
 
 mysql_version: 8.0.29
 mysql_cluster_dir: /var/lib/mysql-cluster
+mysql_data: /var/lib/mysql
 
 management_address: 192.168.10.25
 node1_address: 192.168.10.25
