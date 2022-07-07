@@ -93,20 +93,7 @@
         command: ndbd
 
     - name: install container server node
-      docker_container:
-        name: mysql1
-        image: mysql/mysql-cluster
-        state: started
-        detach: yes
-        recreate: yes
-        ports:
-          - "3302:3306"
-        networks:
-          - name: "{{ docker_network_name }}"
-            ipv4_address: "{{ mysql_address_server_node }}"
-        volumes:
-          - /etc/config_mysql/my.cnf:/etc/my.cnf
-          - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
-          - /var/lib/mysql:/var/lib/mysql
+      docker_container_exec:
+        container: management1
         command: mysqld
       when: inventory_hostname == "mysql-db01"
