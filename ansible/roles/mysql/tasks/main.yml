@@ -64,7 +64,7 @@
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
-          - {{ mysql_data }}:{{ mysql_data }}
+          - "{{ mysql_data }}":"{{ mysql_data }}"
         command: ndb_mgmd
       when: inventory_hostname == "mysql-db01"
 
@@ -89,7 +89,7 @@
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
-          - {{ mysql_data }}:{{ mysql_data }}
+          - "{{ mysql_data }}":"{{ mysql_data }}"
         command: ndbd
 
     - name: install container server node
@@ -107,6 +107,6 @@
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
-          - {{ mysql_data }}:{{ mysql_data }}
+          - "{{ mysql_data }}":"{{ mysql_data }}"
         command: mysqld
       when: inventory_hostname == "mysql-db01"
