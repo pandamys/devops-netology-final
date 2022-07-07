@@ -59,23 +59,32 @@
         dest="{{ mysql_cluster_dir }}/config.ini"
       when: inventory_hostname == "mysql-db01"
 
-    - name: "Copy config my.cnf"
-      template:
-        src=templates/my.cnf
-        dest="/etc/my.cnf"
-
-    - name: copy ndb_mgmd.service file
+    - name: "copy ndb_mgmd.service file"
       copy:
         src: ndb_mgmd.service
         dest: /etc/systemd/system/ndb_mgmd.service
       when: inventory_hostname == "mysql-db01"
 
-    - name: reload daemon
-      shell: systemctl daemon-reload
-      when: inventory_hostname == "mysql-db01"
-
-    - name: Initialize ndb_mgmd
+    - name: "Initialize ndb_mgmd"
       service:
         name: ndb_mgmd
         state: started
       when: inventory_hostname == "mysql-db01"
+
+    - name: "Copy config my.cnf"
+      template:
+        src=templates/my.cnf
+        dest="/etc/my.cnf"
+
+    - name: "copy ndbd.service file"
+      copy:
+        src: ndbd.service
+        dest: /etc/systemd/system/ndbd.service
+
+    - name: "reload daemon ndbd"
+      shell: systemctl daemon-reload
+
+    - name: "Initialize ndbd"
+      service:
+        name: ndbd
+        state: started
