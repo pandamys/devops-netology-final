@@ -4,27 +4,25 @@
         update_cache: yes
       when: ansible_os_family == "Debian"
 
-    - name: install pip3
+    - name: "upload mysql"
+      get_url:
+        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ my_sql_version }}-1ubuntu18.04_amd64.deb"
+        dest: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.tar.gz"
+        mode: 0755
+        timeout: 60
+        force: true
+        validate_certs: false
+      register: get_mysql
+      until: get_mysql is succeeded
+      tags: mysql
+
+    - name: "Install mysql"
       apt:
-        name=python3-pip
-        state=latest
-      when: ansible_os_family == "Debian"
+        deb: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.tar.gz"
 
-    - name: install docker
-      pip:
-        name: docker
-
-    - name: "Create dir for mysql"
+    - name: "Create dir for cluster"
       file:
-        path: "{{ mysql_data }}"
-        state: directory
-        owner: root
-        group: root
-        mode: u=rwx,g=x,o=x
-
-    - name: "Create dir for config"
-      file:
-        path: "{{ mysql_config }}"
+        path: "{{ mysql_cluster_dir }}"
         state: directory
         owner: root
         group: root
@@ -32,62 +30,18 @@
 
     - name: "Copy config my.cnf"
       template:
-        src=templates/my.cnf
-        dest="{{ mysql_config }}"
+        src=templates/mysql_cluster.cnf
+        dest="{{ mysql_cluster_dir }}/config.ini"
 
-    - name: "Copy config mysql-cluster.cnf"
-      template:
-        src=templates/mysql-cluster.cnf
-        dest="{{ mysql_config }}"
+    - name: copy ndb_mgmd.service file
+      copy:
+        src: ndb_mgmd.service
+        dest: /etc/systemd/system/ndb_mgmd.service
 
-    - name: create docker network
-      docker_network:
-        name: "{{ docker_network_name }}"
-        driver: "ipvlan"
-        ipam_config:
-          - subnet: '192.168.0.0/16'
-            gateway: '192.168.0.1'
+    - name: reload daemon
+      shell: systemctl daemon-reload
 
-    - name: install cluster container
-      docker_container:
-        name: management1
-        image: mysql/mysql-cluster
+    - name: Initialize ndb_mgmd
+      service:
+        name: ndb_mgmd
         state: started
-        detach: yes
-        recreate: yes
-        published_ports:
-          - "3306:3306"
-          - "1186:1186"
-        networks:
-          - name: "{{ docker_network_name }}"
-            ipv4_address: "{{ mysql_address_management }}"
-        volumes:
-          - /etc/config_mysql/my.cnf:/etc/my.cnf
-          - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
-          - /var/lib/mysql:/var/lib/mysql
-        command: ndb_mgmd
-      when: inventory_hostname == "mysql-db01"
-
-    - name: install docker container mysql
-      docker_container:
-        name: mysql
-        image: mysql/mysql-cluster
-        state: started
-        auto_remove: true
-        detach: yes
-        recreate: yes
-        published_ports:
-          - "3301:3306"
-        env:
-          MYSQL_USER: "{{ db_user }}"
-          MYSQL_PASSWORD: "{{ db_pass }}"
-          MYSQL_DATABASE: "{{ db_name }}"
-          MYSQL_RANDOM_ROOT_PASSWORD: "true"
-        networks:
-          - name: "{{ docker_network_name }}"
-            ipv4_address: "{{ lookup('vars', 'docker_address_' ~ inventory_hostname) }}"
-        volumes:
-          - /etc/config_mysql/my.cnf:/etc/my.cnf
-          - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
-          - /var/lib/mysql:/var/lib/mysql
-        command: ndbd
