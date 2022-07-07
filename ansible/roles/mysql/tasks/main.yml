@@ -1,4 +1,13 @@
 ---
+    - name: "Create group"
+      group:
+        name: mysql
+
+    - name: "Create users"
+      user:
+        name: mysql
+        group: mysql
+
     - name: "upload mysql cluster"
       get_url:
         url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
@@ -36,6 +45,34 @@
       until: get_mysql is succeeded
       tags: mysql
 
+    -name: "Create dir for data"
+      file:
+        path: "{{ mysql_data }}"
+        state: directory
+        owner: mysql
+        group: mysql
+        mode: u=rwx,g=rx,o=rx
+      when: inventory_hostname == "mysql-db01"
+
+    - name: "Create dir for cluster"
+      file:
+        path: "{{ mysql_cluster_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+      when: inventory_hostname == "mysql-db01"
+
+    - name: "Create dir for install"
+      file:
+        state: directory
+        path: "{{ mysql_unarchive }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+      when: inventory_hostname == "mysql-db01"
+
     - name: "install depency mysql dn"
       apt:
         name: "{{ item }}"
@@ -55,20 +92,6 @@
     - name: "Install mysql dn"
       apt:
         deb: "/tmp/mysql-{{ mysql_version }}-dn-linux-x86_64.deb"
-
-    - name: "Create dir for cluster"
-      file:
-        path: "{{ mysql_cluster_dir }}"
-        state: directory
-        owner: root
-        group: root
-        mode: u=rwx,g=x,o=x
-      when: inventory_hostname == "mysql-db01"
-
-    - name: "Create directrory for install"
-      file:
-        state: directory
-        path: "{{ mysql_unarchive }}"
 
     - name: "Extract mysql"
       unarchive:
