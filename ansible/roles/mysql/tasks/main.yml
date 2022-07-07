@@ -43,8 +43,8 @@
 
     - name: "install depency mysql dn"
       apt:
-        name= {{ item }}
-        state=latest
+        name: "{{ item }}"
+        state: latest
       with_item:
         - libclass-methodmaker-perl
         - libaio1
