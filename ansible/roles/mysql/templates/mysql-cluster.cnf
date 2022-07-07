@@ -3,22 +3,21 @@ NoOfReplicas=2
 DataMemory=80M
 IndexMemory=18M
 
-
 [ndb_mgmd]
 NodeId=1
 hostname={{ mysql_address_management }}
-datadir=/var/lib/mysql
+datadir={{ mysql_data }}
 
 [ndbd]
 NodeId=2
 hostname={{ node1_address }}
-datadir=/var/lib/mysql
+datadir={{ mysql_data }}
 
 [ndbd]
 NodeId=3
 hostname={{ node2_address }}
-datadir=/var/lib/mysql
+datadir={{ mysql_data }}
 
 [mysqld]
-NodeId=4
-hostname={{ mysql_address_server_node }}
+# SQL node options:
+hostname={{ mysql_address_management }}

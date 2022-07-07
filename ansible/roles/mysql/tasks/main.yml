@@ -14,6 +14,14 @@
       pip:
         name: docker
 
+    - name: "Create dir for mysql"
+      file:
+        path: "{{ mysql_data }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+
     - name: "Create dir for config"
       file:
         path: "{{ mysql_config }}"
@@ -56,6 +64,7 @@
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
+          - {{ mysql_data }}:{{ mysql_data }}
         command: ndb_mgmd
       when: inventory_hostname == "mysql-db01"
 
@@ -80,6 +89,7 @@
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
+          - {{ mysql_data }}:{{ mysql_data }}
         command: ndbd
 
     - name: install container server node
@@ -89,7 +99,7 @@
         state: started
         detach: yes
         recreate: yes
-        published_ports:
+        ports:
           - "3302:3306"
         networks:
           - name: "{{ docker_network_name }}"
@@ -97,5 +107,6 @@
         volumes:
           - /etc/config_mysql/my.cnf:/etc/my.cnf
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
+          - {{ mysql_data }}:{{ mysql_data }}
         command: mysqld
       when: inventory_hostname == "mysql-db01"
