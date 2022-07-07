@@ -1,20 +1,17 @@
 [ndbd default]
 NoOfReplicas=2
-DataMemory=80M
-IndexMemory=18M
 
 [ndb_mgmd]
-NodeId=1
 hostname={{ mysql_address_management }}
 datadir={{ mysql_data }}
 
 [ndbd]
-NodeId=2
+NodeId=1
 hostname={{ node1_address }}
 datadir={{ mysql_data }}
 
 [ndbd]
-NodeId=3
+NodeId=2
 hostname={{ node2_address }}
 datadir={{ mysql_data }}
 
