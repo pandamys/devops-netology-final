@@ -115,7 +115,7 @@
     - name: "Copy config my.cnf"
       template:
         src=templates/my.cnf
-        dest="/etc/my.cnf"
+        dest="/etc/mysql/my.cnf"
 
     - name: "copy ndbd.service file"
       copy:
