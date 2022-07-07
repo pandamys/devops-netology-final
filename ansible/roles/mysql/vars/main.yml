@@ -7,6 +7,6 @@ mysql_cluster_dir: /var/lib/mysql-cluster
 mysql_data: /var/lib/mysql
 mysql_unarchive: /tmp/mysql-client-server
 
-management_address: 192.168.10.25
-node1_address: 192.168.10.25
-node2_address: 192.168.10.5
+management_address: 192.168.10.15
+node1_address: 192.168.10.15
+node2_address: 192.168.10.33

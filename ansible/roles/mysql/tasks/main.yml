@@ -1,9 +1,4 @@
 ---
-    - name: update apt packages
-      apt:
-        update_cache: yes
-      when: ansible_os_family == "Debian"
-
     - name: "upload mysql cluster"
       get_url:
         url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
@@ -45,6 +40,7 @@
       apt:
         name: "{{ item }}"
         state: latest
+        update_cache: true
       with_items:
         - 'libclass-methodmaker-perl'
         - 'libaio1'
