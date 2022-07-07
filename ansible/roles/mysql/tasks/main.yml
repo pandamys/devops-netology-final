@@ -69,19 +69,11 @@
         mode: u=rwx,g=x,o=x
       when: inventory_hostname == "mysql-db01"
 
-    - name: "Create dir for install"
-      file:
-        path: "/tmp/install"
-        state: directory
-        owner: root
-        group: root
-        mode: u=rwx,g=x,o=x
-      when: inventory_hostname == "mysql-db01"
-
-    - name: Create directrory for Kibana
+    - name: "Create directrory for install"
       file:
         state: directory
         path: "{{ mysql_unarchive }}"
+      when: inventory_hostname == "mysql-db01"
 
     - name: "Extract mysql"
       unarchive:
@@ -93,7 +85,7 @@
 
     - name: "Install server mysql"
       apt:
-        deb: /tmp/mysql-client-server/mysql-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb
+        deb: "{{ mysql_unarchive }}/mysql-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
 
     - name: "Copy config mysql-cluster.cnf"
       template:
