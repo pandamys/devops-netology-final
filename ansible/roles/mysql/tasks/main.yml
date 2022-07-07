@@ -46,9 +46,9 @@
         name: "{{ item }}"
         state: latest
       with_item:
-        - libclass-methodmaker-perl
-        - libaio1
-        - libmecab2
+        - 'libclass-methodmaker-perl'
+        - 'libaio1'
+        - 'libmecab2'
       when: ansible_os_family == "Debian"
 
     - name: "Install mysql mgmn"
