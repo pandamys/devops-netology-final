@@ -7,7 +7,7 @@
     - name: "upload mysql"
       get_url:
         url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu18.04_amd64.deb"
-        dest: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.tar.gz"
+        dest: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.deb
         mode: 0755
         timeout: 60
         force: true
@@ -18,7 +18,7 @@
 
     - name: "Install mysql"
       apt:
-        deb: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.tar.gz"
+        deb: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.deb"
 
     - name: "Create dir for cluster"
       file:
@@ -28,7 +28,7 @@
         group: root
         mode: u=rwx,g=x,o=x
 
-    - name: "Copy config my.cnf"
+    - name: "Copy config mysql_cluster.cnf"
       template:
         src=templates/mysql_cluster.cnf
         dest="{{ mysql_cluster_dir }}/config.ini"
