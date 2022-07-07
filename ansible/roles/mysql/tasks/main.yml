@@ -73,7 +73,6 @@
       file:
         state: directory
         path: "{{ mysql_unarchive }}"
-      when: inventory_hostname == "mysql-db01"
 
     - name: "Extract mysql"
       unarchive:
@@ -81,7 +80,6 @@
         src: "/tmp/mysql-cluster-{{ mysql_version }}-linux-x86_64.tar"
         dest: "{{ mysql_unarchive }}"
         extra_opts: [ --strip-components=1 ]
-        creates: "{{ mysql_unarchive }}"
 
     - name: "Install server mysql"
       apt:
