@@ -6,12 +6,12 @@ hostname={{ management_address }}
 datadir={{ mysql_data }}
 
 [ndbd]
-NodeId=1
+NodeId=2
 hostname={{ node1_address }}
 datadir={{ mysql_data }}
 
 [ndbd]
-NodeId=2
+NodeId=3
 hostname={{ node2_address }}
 datadir={{ mysql_data }}
 
