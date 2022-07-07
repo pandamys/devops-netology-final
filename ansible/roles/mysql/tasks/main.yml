@@ -30,7 +30,7 @@
 
     - name: "Copy config mysql_cluster.cnf"
       template:
-        src=templates/mysql_cluster.cnf
+        src=templates/mysql-cluster.cnf
         dest="{{ mysql_cluster_dir }}"/config.ini
 
     - name: copy ndb_mgmd.service file
