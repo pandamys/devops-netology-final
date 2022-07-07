@@ -6,7 +6,7 @@
 
     - name: "upload mysql"
       get_url:
-        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ my_sql_version }}-1ubuntu18.04_amd64.deb"
+        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu18.04_amd64.deb"
         dest: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.tar.gz"
         mode: 0755
         timeout: 60
