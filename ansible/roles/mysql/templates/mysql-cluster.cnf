@@ -2,7 +2,7 @@
 NoOfReplicas=2
 
 [ndb_mgmd]
-hostname={{ mysql_address_management }}
+hostname={{ management_address }}
 datadir={{ mysql_data }}
 
 [ndbd]
@@ -17,4 +17,4 @@ datadir={{ mysql_data }}
 
 [mysqld]
 # SQL node options:
-hostname={{ mysql_address_management }}
+hostname={{ management_address }}
