@@ -91,9 +91,3 @@
           - /etc/config_mysql/mysql-cluster.cnf:/etc/mysql-cluster.cnf
           - /var/lib/mysql:/var/lib/mysql
         command: ndbd
-
-    - name: install container server node
-      docker_container:
-        name: management1
-        command: mysqld
-      when: inventory_hostname == "mysql-db01"
