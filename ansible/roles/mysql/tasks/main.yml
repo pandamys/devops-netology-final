@@ -6,21 +6,33 @@
 
     - name: "upload mysql cluster"
       get_url:
-        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu18.04_amd64.deb"
+        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
         dest: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.deb"
         mode: 0755
         timeout: 60
         force: true
         validate_certs: false
-      register: get_mysql
-      until: get_mysql is succeeded
+      register: get_mysql_cluster
+      until: get_mysql_cluster is succeeded
       tags: mysql
       when: inventory_hostname == "mysql-db01"
 
     - name: "upload mysql data-node"
       get_url:
-        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-data-node_{{ mysql_version }}-1ubuntu18.04_amd64.deb"
+        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-data-node_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
         dest: "/tmp/mysql-{{ mysql_version }}-dn-linux-x86_64.deb"
+        mode: 0755
+        timeout: 60
+        force: true
+        validate_certs: false
+      register: get_mysql_dn
+      until: get_mysql_dn is succeeded
+      tags: mysql
+
+    - name: "upload mysql"
+      get_url:
+        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-{{ mysql_version }}-1ubuntu20.04_amd64.deb-bundle.tar"
+        dest: "/tmp/mysql-cluster-{{ mysql_version }}-linux-x86_64.tar"
         mode: 0755
         timeout: 60
         force: true
@@ -31,8 +43,12 @@
 
     - name: "install depency mysql dn"
       apt:
-        name=libclass-methodmaker-perl
+        name= {{ item }}
         state=latest
+      with_item:
+        - libclass-methodmaker-perl
+        - libaio1
+        - libmecab2
       when: ansible_os_family == "Debian"
 
     - name: "Install mysql mgmn"
@@ -52,6 +68,26 @@
         group: root
         mode: u=rwx,g=x,o=x
       when: inventory_hostname == "mysql-db01"
+
+    - name: "Create dir for install"
+      file:
+        path: "/tmp/install"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+      when: inventory_hostname == "mysql-db01"
+
+    - name: "Extract mysql"
+      unarchive:
+        copy: false
+        src: "/tmp/mysql-cluster-{{ mysql_version }}-linux-x86_64.tar"
+        dest: "/tmp/mysql-client-server"
+        extra_opts: [ --strip-components=1 ]
+
+    - name: "Install server mysql"
+      apt:
+        deb: /tmp/mysql-client-server/mysql-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb
 
     - name: "Copy config mysql-cluster.cnf"
       template:
@@ -88,3 +124,8 @@
       service:
         name: ndbd
         state: started
+
+    - name: "Restart mysql"
+      service:
+        name: mysql
+        state: restarted
