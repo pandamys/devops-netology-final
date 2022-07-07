@@ -78,13 +78,18 @@
         mode: u=rwx,g=x,o=x
       when: inventory_hostname == "mysql-db01"
 
+    - name: Create directrory for Kibana
+      file:
+        state: directory
+        path: "{{ mysql_unarchive }}"
+
     - name: "Extract mysql"
       unarchive:
         copy: false
         src: "/tmp/mysql-cluster-{{ mysql_version }}-linux-x86_64.tar"
-        dest: "/tmp/mysql-client-server"
+        dest: "{{ mysql_unarchive }}"
         extra_opts: [ --strip-components=1 ]
-        creates: "/tmp/mysql-client-server"
+        creates: "{{ mysql_unarchive }}"
 
     - name: "Install server mysql"
       apt:
