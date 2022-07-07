@@ -4,7 +4,7 @@
         update_cache: yes
       when: ansible_os_family == "Debian"
 
-    - name: "upload mysql"
+    - name: "upload mysql cluster"
       get_url:
         url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu18.04_amd64.deb"
         dest: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.deb"
@@ -15,10 +15,35 @@
       register: get_mysql
       until: get_mysql is succeeded
       tags: mysql
+      when: inventory_hostname == "mysql-db01"
 
-    - name: "Install mysql"
+    - name: "upload mysql data-node"
+      get_url:
+        url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-data-node_{{ mysql_version }}-1ubuntu18.04_amd64.deb"
+        dest: "/tmp/mysql-{{ mysql_version }}-dn-linux-x86_64.deb"
+        mode: 0755
+        timeout: 60
+        force: true
+        validate_certs: false
+      register: get_mysql
+      until: get_mysql is succeeded
+      tags: mysql
+      when: inventory_hostname == "mysql-db01"
+
+    - name: "install depency mysql dn"
+      apt:
+        name=libclass-methodmaker-perl
+        state=latest
+      when: ansible_os_family == "Debian"
+
+    - name: "Install mysql mgmn"
       apt:
         deb: "/tmp/mysql-{{ mysql_version }}-linux-x86_64.deb"
+      when: inventory_hostname == "mysql-db01"
+
+    - name: "Install mysql dn"
+      apt:
+        deb: "/tmp/mysql-{{ mysql_version }}-dn-linux-x86_64.deb"
 
     - name: "Create dir for cluster"
       file:
@@ -27,21 +52,31 @@
         owner: root
         group: root
         mode: u=rwx,g=x,o=x
+      when: inventory_hostname == "mysql-db01"
 
     - name: "Copy config mysql-cluster.cnf"
       template:
         src=templates/mysql-cluster.cnf
         dest="{{ mysql_cluster_dir }}/config.ini"
+      when: inventory_hostname == "mysql-db01"
+
+    - name: "Copy config my.cnf"
+      template:
+        src=templates/my.cnf
+        dest="/etc/my.cnf"
 
     - name: copy ndb_mgmd.service file
       copy:
         src: ndb_mgmd.service
         dest: /etc/systemd/system/ndb_mgmd.service
+      when: inventory_hostname == "mysql-db01"
 
     - name: reload daemon
       shell: systemctl daemon-reload
+      when: inventory_hostname == "mysql-db01"
 
     - name: Initialize ndb_mgmd
       service:
         name: ndb_mgmd
         state: started
+      when: inventory_hostname == "mysql-db01"
