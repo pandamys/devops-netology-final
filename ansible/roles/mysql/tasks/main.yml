@@ -45,7 +45,7 @@
       apt:
         name: "{{ item }}"
         state: latest
-      with_item:
+      with_items:
         - 'libclass-methodmaker-perl'
         - 'libaio1'
         - 'libmecab2'
