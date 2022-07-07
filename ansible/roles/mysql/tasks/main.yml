@@ -93,7 +93,7 @@
         command: ndbd
 
     - name: install container server node
-      docker_container_exec:
+      docker_container:
         container: management1
         command: mysqld
       when: inventory_hostname == "mysql-db01"
