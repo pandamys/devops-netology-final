@@ -32,7 +32,7 @@
     - name: "upload mysql"
       get_url:
         url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-{{ mysql_version }}-1ubuntu20.04_amd64.deb-bundle.tar"
-        dest: "/tmp/mysql-cluster-{{ mysql_version }}-linux-x86_64.tar"
+        dest: "/tmp/mysql-cluster_{{ mysql_version }}-linux-x86_64.tar"
         mode: 0755
         timeout: 60
         force: true
