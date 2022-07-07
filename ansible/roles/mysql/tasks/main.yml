@@ -46,6 +46,7 @@
         image: mysql/mysql-cluster
         state: started
         detach: yes
+        recreate: yes
         published_ports:
           - "3306:3306"
           - "1186:1186"
@@ -65,6 +66,7 @@
         state: started
         auto_remove: true
         detach: yes
+        recreate: yes
         published_ports:
           - "3301:3306"
         env:
@@ -86,6 +88,7 @@
         image: mysql/mysql-cluster
         state: started
         detach: yes
+        recreate: yes
         published_ports:
           - "3302:3306"
         networks:
