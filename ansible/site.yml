@@ -5,8 +5,14 @@
     #  roles:
     #    - nginx
 
-    - name: Install mysql
+    - name: "Install mysql"
       hosts: databases
       become: yes
       roles:
         - mysql
+
+    - name: "Install wordpress"
+      hosts: wordpresss
+      become: yes
+      roles:
+        - wordpress
