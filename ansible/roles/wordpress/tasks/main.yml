@@ -1,8 +1,11 @@
 ---
-    - name: "Install nginx"
+    - name: "Install nginx/pip3"
       apt:
-        name: python3-pip
+        name: {{ item }}
         update_cache: yes
+      with_items:
+        - nginx
+        - python3-pip
 
     - name: "Install docker"
       pip:
