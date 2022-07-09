@@ -71,7 +71,6 @@
         owner: root
         group: root
         mode: u=rwx,g=x,o=x
-      when: inventory_hostname == "mysql-db01"
 
     - name: "install depency mysql dn"
       apt:
