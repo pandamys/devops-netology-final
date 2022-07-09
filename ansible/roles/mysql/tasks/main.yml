@@ -150,17 +150,20 @@
       service:
         name: ndb_mgmd
         state: started
+        enabled: yes
       when: inventory_hostname == "mysql-db01"
 
     - name: "Initialize ndbd"
       service:
         name: ndbd
         state: started
+        enabled: yes
 
     - name: "Restart mysql"
       service:
         name: mysql
         state: restarted
+        enabled: yes
 
     - name: "update mysql root password"
       mysql_user:
@@ -170,6 +173,11 @@
         login_user: root
         login_password: ''
         login_host: "localhost"
+        login_unix_socket: "/run/mysqld/mysqld.sock"
+      with_items:
+          - localhost
+          - 127.0.0.1
+          - ::1
 
     - name: "create user"
       mysql_user:
