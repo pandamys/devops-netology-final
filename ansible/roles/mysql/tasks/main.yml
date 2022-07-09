@@ -8,6 +8,15 @@
         name: mysql
         group: mysql
 
+    - name: "install pip3"
+      apt:
+        name: pip3
+        state: latest
+
+    - name: "install depency mysql-ansbile"
+      pip:
+        name: "PyMySQL"
+
     - name: "upload mysql cluster"
       get_url:
         url: "https://dev.mysql.com/get/Downloads/MySQL-Cluster-8.0/mysql-cluster-community-management-server_{{ mysql_version }}-1ubuntu20.04_amd64.deb"
@@ -71,7 +80,7 @@
         group: root
         mode: u=rwx,g=x,o=x
 
-    - name: "install depency mysql dn"
+    - name: "install depency mysql-dn"
       apt:
         name: "{{ item }}"
         state: latest
