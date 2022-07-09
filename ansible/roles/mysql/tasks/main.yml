@@ -178,8 +178,8 @@
 
     - name: "create user"
       mysql_user:
-        name: {{ db_user }}
-        password: {{ db_pass }}
+        name: "{{ db_user }}"
+        password: "{{ db_pass }}"
         priv: '*.*:ALL'
         state: present
 
