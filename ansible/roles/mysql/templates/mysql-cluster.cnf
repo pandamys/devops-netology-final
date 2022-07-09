@@ -16,5 +16,11 @@ hostname={{ hostvars['mysql-db02']['ansible_default_ipv4']['address'] }}
 datadir={{ mysql_data }}
 
 [mysqld]
+NodeId=1
 # SQL node options:
 hostname={{ hostvars['mysql-db01']['ansible_default_ipv4']['address'] }}
+
+[mysqld]
+NodeId=2
+# SQL node options:
+hostname={{ hostvars['mysql-db02']['ansible_default_ipv4']['address'] }}
