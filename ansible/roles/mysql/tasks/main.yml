@@ -45,14 +45,14 @@
       until: get_mysql is succeeded
       tags: mysql
 
-    -name: "Create dir for data"
-     file:
-      path: "{{ mysql_data }}"
-      state: directory
-      owner: mysql
-      group: mysql
-      mode: u=rwx,g=rx,o=rx
-     when: inventory_hostname == "mysql-db01"
+    - name: "Create dir for data"
+      file:
+        path: "{{ mysql_data }}"
+        state: directory
+        owner: mysql
+        group: mysql
+        mode: u=rwx,g=rx,o=rx
+      when: inventory_hostname == "mysql-db01"
 
     - name: "Create dir for cluster"
       file:
