@@ -191,5 +191,5 @@
       mysql_db:
         name: "{{ db_name }}"
         state: present
-        login_user: {{ db_user }}
+        login_user: "{{ db_user }}"
         login_password: "{{ db_pass }}"
