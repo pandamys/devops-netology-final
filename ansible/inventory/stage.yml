@@ -2,16 +2,16 @@
     webservers:
       hosts:
         nginx:
-          ansible_host: 51.250.70.13
+          ansible_host: 51.250.76.41
 
     databases:
       hosts:
         mysql-db01:
-          ansible_host: 51.250.69.46
+          ansible_host: 51.250.83.204
         mysql-db02:
-          ansible_host: 51.250.69.46
+          ansible_host: 51.250.79.159
 
     wordpress:
       hosts:
         app:
-          ansible_host: journalctl -xe
+          ansible_host: 51.250.90.74
