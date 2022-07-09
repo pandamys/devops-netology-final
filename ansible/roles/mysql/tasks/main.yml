@@ -65,7 +65,6 @@
 
     - name: "Create dir for install"
       file:
-        state: directory
         path: "{{ mysql_unarchive }}"
         state: directory
         owner: root
