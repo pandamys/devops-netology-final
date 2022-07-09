@@ -1,7 +1,7 @@
 ---
     - name: "Install nginx/pip3"
       apt:
-        name: {{ item }}
+        name: "{{ item }}"
         update_cache: yes
       with_items:
         - nginx
