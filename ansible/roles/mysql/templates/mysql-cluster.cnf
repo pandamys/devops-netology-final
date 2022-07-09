@@ -2,19 +2,19 @@
 NoOfReplicas=2
 
 [ndb_mgmd]
-hostname={{ management_address }}
+hostname={{ hostvars[mysql-db01]['ansible_default_ipv4']['address'] }}
 datadir={{ mysql_data }}
 
 [ndbd]
 NodeId=2
-hostname={{ node1_address }}
+hostname={{ hostvars[mysql-db01]['ansible_default_ipv4']['address'] }}
 datadir={{ mysql_data }}
 
 [ndbd]
 NodeId=3
-hostname={{ node2_address }}
+hostname={{ hostvars[mysql-db02]['ansible_default_ipv4']['address'] }}
 datadir={{ mysql_data }}
 
 [mysqld]
 # SQL node options:
-hostname={{ management_address }}
+hostname={{ hostvars[mysql-db01]['ansible_default_ipv4']['address'] }}
