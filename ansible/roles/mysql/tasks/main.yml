@@ -168,7 +168,7 @@
     - name: "update mysql root password"
       mysql_user:
         name: root
-        host: {{ item }}
+        host: "{{ item }}"
         password: "{{ mysql_root_password }}"
         login_user: root
         login_password: ''
