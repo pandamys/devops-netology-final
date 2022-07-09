@@ -10,7 +10,7 @@
 
     - name: "install pip3"
       apt:
-        name: pip3
+        name: "python-pip3"
         state: latest
 
     - name: "install depency mysql-ansbile"
@@ -176,9 +176,16 @@
         - ::1
         - localhost
 
+    - name: "create user"
+      mysql_user:
+        name: {{ db_user }}
+        password: {{ db_pass }}
+        priv: '*.*:ALL'
+        state: present
+
     - name: "create a new database"
       mysql_db:
-        name: testdb
+        name: {{ db_name }}
         state: present
         login_user: root
         login_password: "{{ mysql_root_password }}"
