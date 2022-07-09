@@ -6,7 +6,7 @@ gitlab_domain: gitlab.pandamys.ru
 grafana_domain: grafana.pandamys.ru
 prometheus_domain: prometheus.pandamys.ru
 alertmanager_domain: alertmanager.pandamys.ru
-wordpress_address: 127.0.0.1
+wordpress_address: {{ hostvars['app-01']['ansible_default_ipv4']['address'] }}
 gitlab_address: 127.0.0.1
 grafana_address: 127.0.0.1
 prometheus_address: 127.0.0.1
