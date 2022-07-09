@@ -171,14 +171,11 @@
         host: "{{ item }}"
         password: "{{ mysql_root_password }}"
         login_user: root
-        login_password: ''
+        login_password: "{{ mysql_root_old_password }}"
         login_host: "localhost"
         login_unix_socket: "/run/mysqld/mysqld.sock"
       with_items:
-        #- localhost
-        - 127.0.0.1
-        - ::1
-        - :1
+        - localhost
 
     - name: "create user"
       mysql_user:
@@ -186,10 +183,13 @@
         password: "{{ db_pass }}"
         priv: '*.*:ALL'
         state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+        login_unix_socket: "/run/mysqld/mysqld.sock"
 
     - name: "create a new database"
       mysql_db:
         name: "{{ db_name }}"
         state: present
-        login_user: root
-        login_password: "{{ mysql_root_password }}"
+        login_user: {{ db_user }}
+        login_password: "{{ db_pass }}"
