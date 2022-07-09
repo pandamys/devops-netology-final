@@ -185,7 +185,7 @@
 
     - name: "create a new database"
       mysql_db:
-        name: {{ db_name }}
+        name: "{{ db_name }}"
         state: present
         login_user: root
         login_password: "{{ mysql_root_password }}"
