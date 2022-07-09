@@ -168,14 +168,14 @@
     - name: "update mysql root password"
       mysql_user:
         name: root
-        host: localhost
+        host: {{ item }}
         password: "{{ mysql_root_password }}"
         login_user: root
         login_password: ''
         login_host: "localhost"
         login_unix_socket: "/run/mysqld/mysqld.sock"
       with_items:
-        - localhost
+        #- localhost
         - 127.0.0.1
         - ::1
         - :1
