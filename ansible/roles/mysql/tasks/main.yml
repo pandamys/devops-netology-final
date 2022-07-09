@@ -181,6 +181,7 @@
       mysql_user:
         name: "{{ db_user }}"
         password: "{{ db_pass }}"
+        host: "%"
         priv: '*.*:ALL'
         state: present
         login_user: root
