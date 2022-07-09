@@ -6,3 +6,4 @@ mysql_version: 8.0.29
 mysql_cluster_dir: /var/lib/mysql-cluster
 mysql_data: /var/lib/mysql
 mysql_unarchive: /tmp/mysql-client-server
+mysql_root_password: QWEzx123!
