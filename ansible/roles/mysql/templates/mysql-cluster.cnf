@@ -3,6 +3,7 @@ NoOfReplicas=2
 datadir={{ mysql_data }}
 
 [ndb_mgmd]
+NodeId=1
 hostname={{ hostvars['mysql-db01']['ansible_default_ipv4']['address'] }}
 datadir={{ mysql_data }}
 
