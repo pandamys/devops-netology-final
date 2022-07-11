@@ -1,5 +1,5 @@
 ---
-    - name "get all info"
+    - name: "get all info"
       setup:
         delegate_to: {{ item }}
         delegate_facts: True
