@@ -16,7 +16,7 @@
        name: wordpress
        image: wordpress
        env:
-         WORDPRESS_DB_HOST: "192.168.10.8"
+         WORDPRESS_DB_HOST: "192.168.10.34"
          WORDPRESS_DB_USER: "{{ db_user }}"
          WORDPRESS_DB_PASSWORD: "{{ db_pass }}"
          WORDPRESS_DB_NAME: "{{ db_name }}"
