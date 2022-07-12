@@ -11,17 +11,29 @@
       pip:
         name: docker
 
+    - name: "Copy nginx.conf"
+      template:
+        src=templates/vhosts.conf
+        dest=/etc/nginx/conf.d/vhosts.conf
+
+    - name: "Restart nginx"
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
+
     - name: "install docker Wordpress"
       docker_container:
        name: wordpress
        image: wordpress
        env:
-         WORDPRESS_DB_HOST: "192.168.10.34"
+         WORDPRESS_DB_HOST: localhost
          WORDPRESS_DB_USER: "{{ db_user }}"
          WORDPRESS_DB_PASSWORD: "{{ db_pass }}"
          WORDPRESS_DB_NAME: "{{ db_name }}"
          WORDPRESS_CONFIG_EXTRA: |
           define('DOMAIN_CURRENT_SITE', 'pandamys.ru');
-
+          define('WP_SITEURL', 'http://pandamys.ru');
+          define('WP_HOME', 'http://pandamys.ru');
        ports:
         - 8080:80

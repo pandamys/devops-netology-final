@@ -33,13 +33,6 @@
         src=templates/nginx_vhosts.conf
         dest=/etc/nginx/conf.d/vhosts.conf
 
-    - name: Install certbot
-      apt:
-        name: certbot
-        state: latest
-      when:
-        ansible_os_family == "Debian"
-
     - name: "Create required directories in /etc/letsencrypt"
       file:
         path: "/etc/letsencrypt/{{ item }}"
