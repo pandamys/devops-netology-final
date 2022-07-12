@@ -18,4 +18,5 @@
 
     monitoring:
       hosts:
-        ansible_host: 62.84.115.59
+        grafana:
+          ansible_host: 62.84.115.59
