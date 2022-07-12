@@ -45,6 +45,6 @@
           define('WP_HOME', 'http://pandamys.ru');
        ports:
         - 8080:80
-       volume:
+       volumes:
         - "{{ wordpress_data }}:/var/www/html"
        recreate: yes
