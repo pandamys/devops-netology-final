@@ -20,8 +20,8 @@
       file:
         path: "{{ grafana_home }}/{{ item }}"
         state: directory
-        owner: root
-        group: root
+        owner: 472
+        group: 472
         mode: u=rwx,g=x,o=x
       with_items:
         - data
@@ -39,16 +39,6 @@
         src=templates/custom.ini
         dest="{{ grafana_home }}/config"
 
-    - name: "Start prometheus docker"
-      docker_container:
-       name: prometheus
-       image: prom/prometheus
-       ports:
-        - 9090:9090
-       volumes:
-        - "{{ prometheus_home }}/prometheus.yml:/etc/prometheus/prometheus.yml"
-       recreate: yes
-
     - name: "Start grafana docker"
       docker_container:
        name: grafana
@@ -59,4 +49,14 @@
         - "{{ grafana_home }}/data:/var/lib/grafana"
         - "{{ grafana_home }}/log:/var/log/grafana"
         - "{{ grafana_home }}/config/custom.ini:/etc/grafana/grafana.ini"
+       recreate: yes
+
+    - name: "Start prometheus docker"
+      docker_container:
+       name: prometheus
+       image: prom/prometheus
+       ports:
+        - 9090:9090
+       volumes:
+        - "{{ prometheus_home }}/prometheus.yml:/etc/prometheus/prometheus.yml"
        recreate: yes
