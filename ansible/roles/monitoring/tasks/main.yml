@@ -30,7 +30,7 @@
 
     - name: "Copy config prometheus"
       template:
-        src=templates/prometheus.conf
+        src=templates/prometheus.yml
         dest="{{ prometheus_home }}"
 
     - name: "Copy config grafana"
