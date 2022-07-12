@@ -35,7 +35,7 @@
        name: wordpress
        image: wordpress
        env:
-         WORDPRESS_DB_HOST: {{ hostvars['app-01']['ansible_default_ipv4']['address'] }}
+         WORDPRESS_DB_HOST: "{{ hostvars['app-01']['ansible_default_ipv4']['address'] }}"
          WORDPRESS_DB_USER: "{{ db_user }}"
          WORDPRESS_DB_PASSWORD: "{{ db_pass }}"
          WORDPRESS_DB_NAME: "{{ db_name }}"
