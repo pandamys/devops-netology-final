@@ -1,0 +1,61 @@
+---
+    - name: "intall pip3"
+      apt:
+        name: python3-pip
+        update_cache: yes
+
+    - name: "install docker"
+      pip:
+        name: docker
+
+    - name: "Create dir for prometheus"
+      file:
+        path: "{{ prometheus_home }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+
+    - name: "Create dir for grafana"
+      file:
+        path: "{{ grafana_home }}/{{ item }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+      with_items:
+        - data
+        - log
+        - config
+
+    - name: "Copy config prometheus"
+      template:
+        src=templates/prometheus.conf
+        dest="{{ prometheus_home }}"
+
+    - name: "Copy config grafana"
+      template:
+        src=templates/custom.ini
+        dest="{{ grafana_home }}/config"
+
+    - name: "Start prometheus docker"
+      docker_container:
+       name: prometheus
+       image: prometheus
+       ports:
+        - 9090:9090
+       volumes:
+        - "{{ prometheus_home }}/prometheus.yml:/etc/prometheus/prometheus.yml"
+       recreate: yes
+
+    - name: "Start grafana docker"
+      docker_container:
+       name: grafana
+       image: grafana
+       ports:
+        - 3000:3000
+       volumes:
+        - "{{ grafana_home }}/data:/var/lib/grafana"
+        - "{{ grafana_home }}/log:/var/log/grafana"
+        - "{{ grafana_home }}/config/custom.ini:/etc/grafana/grafana.ini"
+       recreate: yes

@@ -41,7 +41,7 @@
          WORDPRESS_DB_NAME: "{{ db_name }}"
          WORDPRESS_CONFIG_EXTRA: |
           define('WP_HOME', 'https://pandamys.ru');
-          define('WP_SITEURL', 'https://pandamys.ru');
+          define('WP_SITEURL', 'http://pandamys.ru');
        ports:
         - 8080:80
        volumes:

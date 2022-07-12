@@ -1,0 +1,5 @@
+grafana_home: /opt/grafana
+prometheus_home: /opt/prometheus
+
+standard_login: panda
+standard_pass: QWEzx123!
