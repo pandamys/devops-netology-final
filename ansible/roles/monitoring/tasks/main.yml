@@ -27,6 +27,7 @@
         - data
         - log
         - config
+        - plugins
 
     - name: "Copy config prometheus"
       template:
