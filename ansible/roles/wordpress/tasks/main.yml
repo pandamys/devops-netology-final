@@ -46,5 +46,5 @@
        ports:
         - 8080:80
        volume:
-        - "{{ wordpress_data }}":/var/www/html
+        - "{{ wordpress_data }}:/var/www/html"
        recreate: yes
