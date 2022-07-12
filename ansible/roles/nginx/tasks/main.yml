@@ -2,15 +2,13 @@
     - name: update apt packages
       apt:
         update_cache: yes
-      when:
-        ansible_os_family == "Debian"
+      when: ansible_os_family == "Debian"
 
     - name: Install Nginx Web Server on Debian Family
       apt:
         name=nginx
         state=latest
-      when:
-        ansible_os_family == "Debian"
+      when: ansible_os_family == "Debian"
       notify:
         - nginx systemd
 
@@ -18,8 +16,7 @@
       yum:
         name=nginx
         state=latest
-      when:
-        ansible_os_family == "RedHat"
+      when: ansible_os_family == "RedHat"
       notify:
         - nginx systemd
 
