@@ -51,6 +51,14 @@
         - "{{ grafana_home }}/config/custom.ini:/etc/grafana/grafana.ini"
        recreate: yes
 
+    - name: "Start alertmanager docker"
+      docker_container:
+       name: alertmanager
+       image: prom/alertmanager
+       ports:
+        - 9093:9093
+       recreate: yes
+
     - name: "Start prometheus docker"
       docker_container:
        name: prometheus
