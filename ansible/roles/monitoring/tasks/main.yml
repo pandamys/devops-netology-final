@@ -40,9 +40,9 @@
         dest="{{ grafana_home }}/config"
 
     - name: "Copy config provision grafana"
-          template:
-            src=templates/grafana_provision.yml
-            dest="{{ grafana_home }}/config"
+      template:
+        src=templates/grafana_provision.yml
+        dest="{{ grafana_home }}/config"
 
     - name: "Start grafana docker"
       docker_container:
