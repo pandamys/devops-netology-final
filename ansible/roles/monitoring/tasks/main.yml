@@ -41,7 +41,7 @@
     - name: "Start prometheus docker"
       docker_container:
        name: prometheus
-       image: prometheus
+       image: prom/prometheus
        ports:
         - 9090:9090
        volumes:
