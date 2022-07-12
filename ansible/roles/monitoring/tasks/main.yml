@@ -39,6 +39,11 @@
         src=templates/custom.ini
         dest="{{ grafana_home }}/config"
 
+    - name: "Copy config provision grafana"
+          template:
+            src=templates/grafana_provision.yml
+            dest="{{ grafana_home }}/config"
+
     - name: "Start grafana docker"
       docker_container:
        name: grafana
@@ -49,6 +54,7 @@
         - "{{ grafana_home }}/data:/var/lib/grafana"
         - "{{ grafana_home }}/log:/var/log/grafana"
         - "{{ grafana_home }}/config/custom.ini:/etc/grafana/grafana.ini"
+        - "{{ grafana_home }}/config/grafana_provision.yml:/etc/grafana/provisioning/datasources/prometheus.yml"
        recreate: yes
 
     - name: "Start alertmanager docker"
