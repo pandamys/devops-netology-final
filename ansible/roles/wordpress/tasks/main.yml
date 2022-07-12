@@ -22,6 +22,14 @@
         state: restarted
         enabled: yes
 
+    - name: "Create dir for wordpress"
+      file:
+        path: "{{ wordpress_data }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+
     - name: "install docker Wordpress"
       docker_container:
        name: wordpress
@@ -37,3 +45,6 @@
           define('WP_HOME', 'http://pandamys.ru');
        ports:
         - 8080:80
+       volume:
+        - {{ wordpress_data }}:/var/www/html
+       recreate: yes
