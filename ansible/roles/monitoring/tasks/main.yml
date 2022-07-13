@@ -74,3 +74,11 @@
        volumes:
         - "{{ prometheus_home }}/prometheus.yml:/etc/prometheus/prometheus.yml"
        recreate: yes
+
+    - name: "import dashboard grafana"
+      grafana_dashboard:
+        grafana_url: "http://{{ grafana_domain }}"
+        grafana_user: {{ grafana_user }}
+        grafana_password: {{ grafana_password }}
+        folder: general
+        dashboard_id: 2381

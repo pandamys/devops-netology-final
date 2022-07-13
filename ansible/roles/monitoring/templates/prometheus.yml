@@ -1,7 +1,7 @@
 # my global config
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  evaluation_interval: 5s # Evaluate rules every 15 seconds. The default is every 1 minute.
   # scrape_timeout is set to the global default (10s).
 
   # Attach these labels to any time series or alerts when communicating with
@@ -31,14 +31,10 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name: 'docker'
-         # metrics_path defaults to '/metrics'
-         # scheme defaults to 'http'.
-
-    static_configs:
-      - targets: ['localhost:9323']
+      - targets:
+        - 'localhost:9100'
+        - '192.168.10.4:9100'
+        - '192.168.10.16:9100'
 
 remote_write:
   - url: http://{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}:3000
