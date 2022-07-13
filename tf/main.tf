@@ -111,6 +111,30 @@ resource "yandex_compute_instance" "app" {
   }
 }
 
+resource "yandex_compute_instance" "gitlab" {
+  name = "gitlab-pandamys-ru"
+
+  resources {
+    cores  = 4
+    memory = 4
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd8hguc7o9hhr5bcvhql"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet-1.id
+    nat       = true
+  }
+
+  metadata = {
+    user-data = file("./meta.yml")
+  }
+}
+
 resource "yandex_compute_instance" "monitoring" {
   name = "monitoring-pandamys-ru"
 
