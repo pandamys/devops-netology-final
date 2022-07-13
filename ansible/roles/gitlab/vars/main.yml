@@ -2,3 +2,4 @@ gitlab_home: /opt/gitlab
 gitlab_runner_home: /opt/gitlab_runner
 gitlab_port_http: 8929
 gitlab_port_ssh: 2224
+gitlab_start_password: "QWEzx123!"
