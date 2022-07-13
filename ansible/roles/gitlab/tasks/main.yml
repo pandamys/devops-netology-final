@@ -35,7 +35,7 @@
       docker_container:
        name: gitlab
        image: gitlab/gitlab-ce:latest
-       environment:
+       env:
         GITLAB_OMNIBUS_CONFIG: |
           external_url 'https://{{ gitlab_domain }}'
           # Add any other gitlab.rb configuration here, each on its own line
@@ -57,6 +57,6 @@
         - "{{ gitlab_runner_home }}/data:/home/gitlab_ci_multi_runner/data"
         - "{{ gitlab_runner_home }}/config:/etc/gitlab-runner"
         - "/var/run/docker.sock:/var/run/docker.sock:rw"
-       environment:
+       env:
         CI_SERVER_URL: "https://{{ gitlab_domain }}/ci"
        recreate: yes
