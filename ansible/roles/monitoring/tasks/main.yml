@@ -81,4 +81,5 @@
         url_username: "{{ standard_login }}"
         url_password: "{{ standard_pass }}"
         folder: general
+        validate_certs: no
         dashboard_id: 2381
