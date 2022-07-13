@@ -40,8 +40,8 @@
           external_url "http://{{ gitlab_domain }}"
           # Add any other gitlab.rb configuration here, each on its own line
        ports:
-        - 8080:80
-        - 2224:22
+        - "8080:80"
+        - "2224:22"
        volumes:
         - "{{ gitlab_home }}/data:/var/opt/gitlab"
         - "{{ gitlab_home }}/logs:/var/log/gitlab"
