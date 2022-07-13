@@ -1,24 +1,30 @@
 ---
-    #- name: "Install mysql"
-    #  hosts: databases
-    #  become: yes
-    #  roles:
-    #    - mysql
+    - name: "Install mysql"
+      hosts: databases
+      become: yes
+      roles:
+        - mysql
 
-    #- name: "Install wordpress"
-    #  hosts: wordpress
-    #  become: yes
-    #  roles:
-    #    - wordpress
+    - name: "Install wordpress"
+      hosts: wordpress
+      become: yes
+      roles:
+        - wordpress
 
-    #- name: "Install nginx-proxy"
-    #  hosts: webservers
-    #  become: yes
-    #  roles:
-    #    - nginx
+    - name: "Install CI"
+      hosts: ci
+      become: yes
+      roles:
+        - gitlab
 
     - name: "Install monitoring"
       hosts: monitoring
       become: yes
       roles:
         - monitoring
+
+    - name: "Install nginx-proxy"
+      hosts: webservers
+      become: yes
+      roles:
+        - nginx

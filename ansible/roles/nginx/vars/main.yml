@@ -1,16 +1,11 @@
 worker_processes: auto
 worker_connections: 2048
 client_max_body_size: 512M
-virtual_domain: pandamys.ru
-gitlab_domain: gitlab.pandamys.ru
-grafana_domain: grafana.pandamys.ru
-prometheus_domain: prometheus.pandamys.ru
-alertmanager_domain: alertmanager.pandamys.ru
 wordpress_address: "{{ hostvars['app-01']['ansible_default_ipv4']['address'] }}"
-gitlab_address: 127.0.0.1
-grafana_address: 127.0.0.1
-prometheus_address: 127.0.0.1
-alertmanager_address: 127.0.0.1
+gitlab_address: "{{ hostvars['gitlab']['ansible_default_ipv4']['address'] }}"
+grafana_address: "{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}"
+prometheus_address: "{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}"
+alertmanager_address: "{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}"
 
 acme_challenge_type: http-01
 acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory

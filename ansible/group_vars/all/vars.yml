@@ -3,3 +3,8 @@
     db_name: wordpress
     db_user: wordpress
     db_pass: wordpress
+    virtual_domain: pandamys.ru
+    gitlab_domain: gitlab.pandamys.ru
+    grafana_domain: grafana.pandamys.ru
+    prometheus_domain: prometheus.pandamys.ru
+    alertmanager_domain: alertmanager.pandamys.ru
