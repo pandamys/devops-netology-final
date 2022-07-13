@@ -23,8 +23,8 @@
       roles:
         - monitoring
 
-    - name: "Install nginx-proxy"
-      hosts: webservers
-      become: yes
-      roles:
-        - nginx
+    #- name: "Install nginx-proxy"
+    #  hosts: webservers
+    #  become: yes
+    #  roles:
+    #    - nginx
