@@ -176,6 +176,7 @@
         login_unix_socket: "/run/mysqld/mysqld.sock"
       with_items:
         - localhost
+      run_once: true
 
     - name: "create user"
       mysql_user:
