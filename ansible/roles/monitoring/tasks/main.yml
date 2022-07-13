@@ -78,7 +78,7 @@
     - name: "import dashboard grafana"
       grafana_dashboard:
         grafana_url: "http://{{ grafana_domain }}"
-        grafana_user: "{{ grafana_user }}"
-        grafana_password: "{{ grafana_password }}"
+        url_username: "{{ grafana_user }}"
+        url_password: "{{ grafana_password }}"
         folder: general
         dashboard_id: 2381
