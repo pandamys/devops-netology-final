@@ -41,7 +41,7 @@
          WORDPRESS_DB_NAME: "{{ db_name }}"
          WORDPRESS_CONFIG_EXTRA: |
           define('WP_HOME', 'https://{{ virtual_domain }}');
-          define('WP_SITEURL', 'http://{{ virtual_domain }}');
+          define('WP_SITEURL', 'https://{{ virtual_domain }}');
        ports:
         - 8080:80
        volumes:
