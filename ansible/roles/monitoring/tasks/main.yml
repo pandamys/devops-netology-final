@@ -81,4 +81,4 @@
         url_username: "{{ standard_login }}"
         url_password: "{{ standard_pass }}"
         validate_certs: no
-        dashboard_id: 1860
+        dashboard_id: 3662
