@@ -13,7 +13,7 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - [{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}:9093]
+      - {{ hostvars['grafana']['ansible_default_ipv4']['address'] }}:9093
 
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
