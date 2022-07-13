@@ -4,6 +4,7 @@
       become: yes
       roles:
         - mysql
+        - node_exporter
 
     - name: "Install wordpress"
       hosts: wordpress
