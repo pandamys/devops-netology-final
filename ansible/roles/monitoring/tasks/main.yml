@@ -29,6 +29,14 @@
         - config
         - plugins
 
+    - name: "Create dir for alertmanager"
+      file:
+        path: "{{ alertmanager_home }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=x,o=x
+
     - name: "Copy config prometheus"
       template:
         src=templates/prometheus.yml
