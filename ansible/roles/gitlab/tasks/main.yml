@@ -36,6 +36,11 @@
     #    src=templates/gitlab.rb
     #    dest="{{ gitlab_home }}/config"
 
+    - name: "Copy config gitlab-runner"
+      template:
+        src=templates/runner-config.toml
+        dest="{{ gitlab_runner_home }}/config.toml"
+
     - name: "Start gitlab docker"
       docker_container:
        name: gitlab
