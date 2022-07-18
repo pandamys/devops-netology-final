@@ -44,6 +44,11 @@
         src=templates/grafana_provision.yml
         dest="{{ grafana_home }}/config"
 
+    - name: "Copy config alertmanager"
+      template:
+        src=templates/alertmanager.rules.yml
+        dest="{{ alertmanager_home }}/alert.rules.yml"
+
     - name: "Start grafana docker"
       docker_container:
        name: grafana
@@ -63,6 +68,8 @@
        image: prom/alertmanager
        ports:
         - 9093:9093
+       volumes:
+        - "{{ alertmanager_home }}/alert.rules.yml:/etc/alertmanager/alert.rules.yml"
        recreate: yes
 
     - name: "Start prometheus docker"
