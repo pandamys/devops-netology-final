@@ -4,3 +4,7 @@ datasources:
   type: prometheus
   access: proxy
   url: http://{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}:9090
+
+- name: Alertmanager
+  type: Alertmanager
+  url: http://{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}:9093

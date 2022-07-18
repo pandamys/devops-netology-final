@@ -1,4 +1,9 @@
+concurrent = 1
+check_interval = 0
+
+[session_server]
+session_timeout = 1800
+
 [[runners]]
-[runners.docker]
-[[runners.docker.services]]
-name = "wordpress:latest"
+    name = "wordpress"
+    url = "https://{{ gitlab_domain }}"

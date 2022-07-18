@@ -1,10 +1,10 @@
 ---
-    - name: update apt packages
+    - name: "update apt packages"
       apt:
         update_cache: yes
       when: ansible_os_family == "Debian"
 
-    - name: Install Nginx Web Server on Debian Family
+    - name: "Install Nginx Web Server on Debian Family"
       apt:
         name=nginx
         state=latest
@@ -12,20 +12,17 @@
       notify:
         - nginx systemd
 
-    - name: Install Nginx Web Server on RedHat Family
-      yum:
-        name=nginx
-        state=latest
-      when: ansible_os_family == "RedHat"
-      notify:
-        - nginx systemd
-
-    - name: Replace nginx.conf
+    - name: "Replace nginx.conf"
       template:
         src=templates/nginx.conf
         dest=/etc/nginx/nginx.conf
 
-    - name: Add virtual domain in NGINX
+    - name: "Replace nginx_default_site"
+      template:
+        src=templates/nginx_default_site.conf
+        dest=/etc/nginx/sites-available/default
+
+    - name: "Add virtual domain in NGINX"
       template:
         src=templates/nginx_vhosts.conf
         dest=/etc/nginx/conf.d/vhosts.conf

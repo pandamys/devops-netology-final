@@ -39,7 +39,7 @@
     - name: "Copy config gitlab-runner"
       template:
         src=templates/runner-config.toml
-        dest="{{ gitlab_runner_home }}/config.toml"
+        dest="{{ gitlab_runner_home }}/config/config.toml"
 
     - name: "Start gitlab docker"
       docker_container:

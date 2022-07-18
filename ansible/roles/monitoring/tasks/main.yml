@@ -55,7 +55,7 @@
     - name: "Copy config alertmanager"
       copy:
         src=templates/alertmanager.rules.yml
-        dest="{{ alertmanager_home }}/alert.rules.yml"
+        dest="{{ prometheus_home }}/alert.rules.yml"
 
     - name: "Start grafana docker"
       docker_container:
@@ -96,5 +96,5 @@
         url_username: "{{ standard_login }}"
         url_password: "{{ standard_pass }}"
         validate_certs: no
-        dashboard_id: 3662
+        dashboard_id: 1860
         overwrite: yes
