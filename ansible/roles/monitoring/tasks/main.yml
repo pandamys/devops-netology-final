@@ -77,7 +77,7 @@
 
     - name: "import dashboard grafana"
       grafana_dashboard:
-        grafana_url: "https://{{ grafana_domain }}"
+        grafana_url: "https://{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}"
         url_username: "{{ standard_login }}"
         url_password: "{{ standard_pass }}"
         validate_certs: no
