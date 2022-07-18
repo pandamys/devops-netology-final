@@ -45,7 +45,7 @@
         dest="{{ grafana_home }}/config"
 
     - name: "Copy config alertmanager"
-      template:
+      copy:
         src=templates/alertmanager.rules.yml
         dest="{{ alertmanager_home }}/alert.rules.yml"
 
