@@ -25,16 +25,11 @@ rule_files:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'node'
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
+  - job_name: 'monitoring'
     static_configs:
       - targets:
-        - 'localhost:9100'
-        - '192.168.10.4:9100'
-        - '192.168.10.16:9100'
+        - ['{{ inventory_hostname }}:9100']
+
 
 remote_write:
   - url: http://{{ hostvars['grafana']['ansible_default_ipv4']['address'] }}:3000
