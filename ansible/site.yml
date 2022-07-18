@@ -11,21 +11,24 @@
       become: yes
       roles:
         - wordpress
+        - node_exporter
 
     - name: "Install CI"
       hosts: ci
       become: yes
       roles:
         - gitlab
+        - node_exporter
 
     - name: "Install monitoring"
       hosts: monitoring
       become: yes
       roles:
         - monitoring
+        - node_exporter
 
-    - name: "Install nginx-proxy"
-      hosts: webservers
-      become: yes
-      roles:
-        - nginx
+    #- name: "Install nginx-proxy"
+    #  hosts: webservers
+    #  become: yes
+    #  roles:
+    #    - nginx

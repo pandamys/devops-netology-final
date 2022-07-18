@@ -76,7 +76,7 @@
         group: root
         mode: u=rwx,g=rx,o=rx
 
-    - name: "Implement http-01 challenge files"
+    - name: "Implement challenge files"
       copy:
         content: "{{ acme_challenge_pandamys_ru['challenge_data'][item]['http-01']['resource_value'] }}"
         dest: "/var/www/html/{{ acme_challenge_pandamys_ru['challenge_data'][item]['http-01']['resource'] }}"
