@@ -52,6 +52,11 @@
         src=templates/grafana_provision.yml
         dest="{{ grafana_home }}/config"
 
+    - name: "Copy dashboard grafana"
+      template:
+        src=templates/dashboard_for_node_exporter.json
+        dest="{{ grafana_home }}/config/standard_dashboard.json"
+
     - name: "Copy config alertmanager"
       copy:
         src=templates/alertmanager.rules.yml
@@ -96,5 +101,5 @@
         url_username: "{{ standard_login }}"
         url_password: "{{ standard_pass }}"
         validate_certs: no
-        dashboard_id: 1860
+        path: "{{ grafana_home }}/config/standard_dashboard.json"
         overwrite: yes
