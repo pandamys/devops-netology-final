@@ -28,7 +28,8 @@
         dest=/etc/nginx/conf.d/vhosts.conf
 
     - name: "Remove old directory"
-      file: "/etc/letsencrypt/"
+      file:
+        path: "/etc/letsencrypt/"
         state: absent
 
     - name: "Create required directories in /etc/letsencrypt"
