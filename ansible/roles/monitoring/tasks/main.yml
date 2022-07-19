@@ -87,7 +87,7 @@
        ports:
         - 9093:9093
        volumes:
-        - "{{ alertmanager_home }}/alert.rules.yml:/etc/alertmanager/alert.rules.yml"
+        - "{{ alertmanager_home }}/alertmanager.yml:/etc/alertmanager/alertmanager.yml"
         - "{{ alertmanager_home }}/alert.rules.yml:/etc/alertmanager/alert.rules.yml"
        recreate: yes
 
