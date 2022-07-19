@@ -24,4 +24,4 @@
     ci:
       hosts:
         gitlab:
-          ansible_host: 51.250.90.188
+          ansible_host: 62.84.124.137

@@ -59,6 +59,11 @@
 
     - name: "Copy config alertmanager"
       copy:
+        src=templates/alertmanager.yml
+        dest="{{ prometheus_home }}/alertmanager.yml"
+
+    - name: "Copy config alertmanager"
+      copy:
         src=templates/alertmanager.rules.yml
         dest="{{ prometheus_home }}/alert.rules.yml"
 
@@ -82,6 +87,7 @@
        ports:
         - 9093:9093
        volumes:
+        - "{{ alertmanager_home }}/alert.rules.yml:/etc/alertmanager/alert.rules.yml"
         - "{{ alertmanager_home }}/alert.rules.yml:/etc/alertmanager/alert.rules.yml"
        recreate: yes
 
