@@ -53,7 +53,7 @@
         dest="{{ grafana_home }}/config"
 
     - name: "Copy dashboard grafana"
-      template:
+      copy:
         src=templates/dashboard_for_node_exporter.json
         dest="{{ grafana_home }}/config/standard_dashboard.json"
 
