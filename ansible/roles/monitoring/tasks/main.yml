@@ -62,7 +62,7 @@
         src=templates/alertmanager.yml
         dest="{{ prometheus_home }}/alertmanager.yml"
 
-    - name: "Copy config alertmanager"
+    - name: "Copy config alertmanager rules"
       copy:
         src=templates/alertmanager.rules.yml
         dest="{{ prometheus_home }}/alert.rules.yml"

@@ -1,4 +1,25 @@
 ---
+    - name: "Install mysql"
+      hosts: databases
+      become: yes
+      roles:
+        - mysql
+        - node_exporter
+
+    - name: "Install wordpress"
+      hosts: wordpress
+      become: yes
+      roles:
+        - wordpress
+        - node_exporter
+
+    - name: "Install CI"
+      hosts: ci
+      become: yes
+      roles:
+        - gitlab
+        - node_exporter
+
     - name: "Install monitoring"
       hosts: monitoring
       become: yes
@@ -6,9 +27,9 @@
         - monitoring
         - node_exporter
 
-    #- name: "Install nginx-proxy"
-    #  hosts: webservers
-    #  become: yes
-    #  roles:
-    #    - nginx
-    #    - node_exporter
+    - name: "Install nginx-proxy"
+      hosts: webservers
+      become: yes
+      roles:
+        - nginx
+        - node_exporter
