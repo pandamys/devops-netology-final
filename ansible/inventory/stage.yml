@@ -2,26 +2,26 @@
     webservers:
       hosts:
         nginx:
-          ansible_host: 62.84.125.134
+          ansible_host: 51.250.87.90
 
     databases:
       hosts:
         mysql-db01:
-          ansible_host: 62.84.125.86
+          ansible_host: 51.250.93.243
         mysql-db02:
-          ansible_host: 62.84.127.142
+          ansible_host: 51.250.87.90
 
     wordpress:
       hosts:
         app-01:
-          ansible_host: 62.84.124.230
+          ansible_host: 51.250.68.248
 
     monitoring:
       hosts:
         grafana:
-          ansible_host: 62.84.127.238
+          ansible_host: 51.250.90.188
 
     ci:
       hosts:
         gitlab:
-          ansible_host: 62.84.127.134
+          ansible_host: 51.250.90.188
