@@ -29,7 +29,7 @@
 
     - name: "Remove old directory"
       file: "/etc/letsencrypt/"
-      state: absent
+        state: absent
 
     - name: "Create required directories in /etc/letsencrypt"
       file:
